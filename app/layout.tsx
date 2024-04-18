@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as FontSans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+dayjs.extend(advancedFormat);
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Splitify",
@@ -18,9 +26,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
+    <ClerkProvider>
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>{children}</body>
       </html>
     </ClerkProvider>
   );
