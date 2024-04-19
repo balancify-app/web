@@ -1,10 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 
 export default function Dashboard() {
   return (
-    <>
-      <h1 className="mb-6">Dashboard</h1>
-      <Button>Click me</Button>
-    </>
-  );
+    <div className="flex h-screen flex-col items-center justify-center">
+      <div className="flex items-center">
+        <h1 className="border-r-[1px] border-gray-400 p-2  px-4">Under Construction</h1>
+        <h1 className="p-2 px-4">Dashboard page</h1>
+      </div>
+    </div>
+  )
 }
