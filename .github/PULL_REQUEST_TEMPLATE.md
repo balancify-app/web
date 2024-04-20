@@ -12,7 +12,7 @@
 
 ## Description
 
-_Please describe your PR here._ Why is this change required? What problem does it
+_Please describe your PR here._ Why is this change required? What problem does it?
 
 ## Added Dependencies
 
