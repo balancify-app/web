@@ -16,8 +16,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Splitify",
-  description: "Splitify is a simple way to split bills with friends.",
+  title: "Balancify",
+  description: "Balancify is a simple way to split bills with friends.",
 };
 
 export default function RootLayout({
@@ -28,7 +28,14 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>{children}</body>
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable
+          )}
+        >
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
