@@ -1,7 +1,7 @@
 'use client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/lib/constants'
 import { cn } from '@/lib/utils'
@@ -26,7 +26,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         >
           <div className="overflow-hidden p-2">
             <h1 className={cn('mb-6 text-lg font-bold', { hidden: isCollapsed })}>Balancify</h1>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <Avatar className={cn('h-14 w-14 border', { 'animate-pulse': !isLoaded, 'h-9 w-9': isCollapsed })}>
                 <AvatarImage src={user?.imageUrl} />
                 <AvatarFallback>
@@ -36,13 +36,13 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </Avatar>
               <div className={cn('block', { hidden: isCollapsed })}>
                 {isLoaded ? (
-                  <h1 className="whitespace-nowrap pl-3 text-sm">Hello, {user?.firstName || '--'}</h1>
+                  <h1 className="whitespace-nowrap text-sm">Hello, {user?.firstName || '--'}</h1>
                 ) : (
-                  <div className="ml-3 h-5 animate-pulse rounded-lg bg-gray-100" />
+                  <div className=" h-5 animate-pulse rounded-lg bg-gray-100" />
                 )}
-                <Button variant="ghost" size="sm" asChild>
-                  <Link href={ROUTES.APP.PROFILE}>View account</Link>
-                </Button>
+                <Link href={ROUTES.APP.PROFILE} className="text-xs underline-offset-4 hover:underline">
+                  View account
+                </Link>
               </div>
             </div>
           </div>
