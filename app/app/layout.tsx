@@ -46,7 +46,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
           </div>
-          <Separator className="my-2" />
+          <Separator />
           <div className="flex flex-1 flex-col justify-between overflow-hidden p-2">
             <div className={cn('flex flex-col gap-2', { 'items-center': isCollapsed })}>
               {appLinks.map((al) => (
