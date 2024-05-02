@@ -3,7 +3,7 @@
 import { ROUTES } from '@/lib/constants'
 import { useUser } from '@clerk/nextjs'
 import { useMemo, useState } from 'react'
-import { LayoutDashboard, LucideIcon, PieChart, User, Users } from 'lucide-react'
+import { LayoutDashboard, LucideIcon, PieChart, Settings, User, Users } from 'lucide-react'
 
 type AppLinkType = {
   title: string
@@ -12,7 +12,7 @@ type AppLinkType = {
 }
 
 export default function useAppLayout() {
-  const { user, isLoaded } = useUser()
+  const { user, isLoaded: userLoaded } = useUser()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   const appLinks: AppLinkType[] = useMemo(
@@ -37,17 +37,20 @@ export default function useAppLayout() {
         link: ROUTES.APP.FRIENDS,
         icon: User,
       },
+      {
+        title: 'Settings',
+        link: ROUTES.APP.SETTINGS,
+        icon: Settings,
+      },
     ],
     [],
   )
-
-  console.log(appLinks)
 
   return {
     isCollapsed,
     setIsCollapsed,
     user,
-    isLoaded,
+    userLoaded,
     appLinks,
   }
 }

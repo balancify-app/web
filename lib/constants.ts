@@ -12,7 +12,6 @@ export const ROUTES = {
     GROUPS: '/app/groups',
     FRIENDS: '/app/friends',
     SETTINGS: '/app/settings',
-    PROFILE: '/app/profile',
   },
   PORTAL: {
     HOME: '/portal',
