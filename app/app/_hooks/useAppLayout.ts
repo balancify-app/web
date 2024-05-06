@@ -5,10 +5,10 @@ import { useUser } from '@clerk/nextjs'
 import { useMemo, useState } from 'react'
 import { LayoutDashboard, LucideIcon, PieChart, Settings, User, Users } from 'lucide-react'
 
-type AppLinkType = {
+export type AppLinkType = {
   title: string
   link: string
-  icon: LucideIcon
+  Icon: LucideIcon
 }
 
 export default function useAppLayout() {
@@ -20,27 +20,27 @@ export default function useAppLayout() {
       {
         title: 'Dashboard',
         link: ROUTES.APP.DASHBOARD,
-        icon: LayoutDashboard,
+        Icon: LayoutDashboard,
       },
       {
         title: 'Expenses',
         link: ROUTES.APP.EXPENSES,
-        icon: PieChart,
+        Icon: PieChart,
       },
       {
         title: 'Groups',
         link: ROUTES.APP.GROUPS,
-        icon: Users,
+        Icon: Users,
       },
       {
         title: 'Friends',
         link: ROUTES.APP.FRIENDS,
-        icon: User,
+        Icon: User,
       },
       {
         title: 'Settings',
         link: ROUTES.APP.SETTINGS,
-        icon: Settings,
+        Icon: Settings,
       },
     ],
     [],

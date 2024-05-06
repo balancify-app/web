@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn('min-h-screen font-sans antialiased', fontSans.variable)}>{children}</body>
+        <body className={cn('min-h-dvh font-sans antialiased', fontSans.variable)}>{children}</body>
       </html>
     </ClerkProvider>
   )
