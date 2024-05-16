@@ -1,8 +1,8 @@
 import Link from 'next/link'
+import { UserButton } from '@clerk/nextjs'
 import { auth } from '@clerk/nextjs/server'
 
 import { Button } from '@/components/ui/button'
-import { ROUTES } from '@/lib/constants'
 
 export default function Home() {
   const { userId } = auth()
@@ -14,22 +14,18 @@ export default function Home() {
         <h1 className="p-2 px-4">Landing page</h1>
       </div>
 
-      <div className="mt-6">
-        {userId ? (
-          <Button asChild>
-            <Link href={ROUTES.APP.HOME}>App</Link>
+      {userId ? (
+        <UserButton afterSignOutUrl="/" />
+      ) : (
+        <div className="flex gap-2">
+          <Button asChild className="mt-6">
+            <Link href="/sign-in">Sign In</Link>
           </Button>
-        ) : (
-          <div className="flex gap-2">
-            <Button asChild>
-              <Link href={ROUTES.LANDING.SIGN_IN}>Sign In</Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link href={ROUTES.LANDING.SIGN_UP}>Sign Up</Link>
-            </Button>
-          </div>
-        )}
-      </div>
+          <Button asChild className="mt-6" variant="secondary">
+            <Link href="/sign-up">Sign Up</Link>
+          </Button>
+        </div>
+      )}
     </main>
   )
 }
