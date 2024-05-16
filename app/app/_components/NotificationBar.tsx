@@ -4,7 +4,7 @@ import { Bell } from 'lucide-react'
 
 export default function NotificationBar() {
   return (
-    <div className="fixed left-0 right-0 top-0 flex h-12 items-start justify-between px-2 pt-2">
+    <div className="fixed left-0 right-0 top-0 flex items-start justify-between px-4 pt-4">
       <div>
         <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border block sm:hidden' } }} />
       </div>
