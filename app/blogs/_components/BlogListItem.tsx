@@ -12,10 +12,9 @@ export default function BlogListItem({ children, date, title, version }: BlogLis
         <h1 className=" text-right text-sm text-gray-400 ">{date}</h1>
       </div>
       <div className="relative w-0.5 translate-y-3 bg-border group-last:bg-transparent">
-        <div className="relative left-0 top-0 h-3.5 w-3.5 -translate-x-1.5 -translate-y-1/2 rounded-full bg-border after:absolute after:left-1/2 after:top-1/2 after:h-2/3 after:w-2/3 after:-translate-x-1/2 after:-translate-y-1/2 after:rounded-full after:bg-background" />
+        <div className="relative left-0 top-0 h-3.5 w-3.5 -translate-x-1.5 -translate-y-1/2 rounded-full bg-border" />
       </div>
-      <div className="flex-1">
-        {/* <h1 className="my-0.5 block text-sm text-gray-400 md:hidden">{date}</h1> */}
+      <div className="flex-1 pb-12">
         <h1 className="font-bold">{title}</h1>
         <p className="mb-6 mt-1 text-sm text-gray-400">
           <span className="inline text-sm text-gray-400 md:hidden">{date} • </span>
