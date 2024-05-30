@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
+
+import packageJson from './package.json' assert { type: 'json' }
+
 const nextConfig = {
+  env: {
+    version: packageJson.version,
+  },
   experimental: {
     swcPlugins: [['@swc-jotai/react-refresh', {}]],
   },
