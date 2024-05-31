@@ -27,9 +27,9 @@ export default function DesktopNav({
   return (
     <nav
       className={cn(
-        'relative hidden flex-shrink-0 flex-col  justify-between border-r p-2 transition-all duration-300 sm:flex',
+        'relative hidden flex-shrink-0 flex-col  justify-between border-r p-4 transition-all duration-300 sm:flex',
         {
-          'w-[55px]': isCollapsed,
+          'w-[70px]': isCollapsed,
           'w-[250px]': !isCollapsed,
         },
       )}
