@@ -1,13 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { cn, randomNumBetween } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { GroupMember } from '@/services/group.model'
 import { Ellipsis } from 'lucide-react'
 
 export function GroupWrapper({
   children,
+  loading,
 }: Readonly<{
-  children: React.ReactNode
+  children?: React.ReactNode
+  loading: boolean
 }>) {
   return (
     <ul className="flex w-full flex-col gap-4">
@@ -17,7 +19,7 @@ export function GroupWrapper({
         <h1 className="hidden flex-[0.2] text-sm lg:block">Created</h1>
         <h1 className="flex-[0.4] text-sm lg:flex-[0.2]">Total</h1>
       </li>
-      {children}
+      {loading ? Array.from({ length: 3 }).map((_, i) => <GroupRowPlaceholder key={i} />) : children}
     </ul>
   )
 }
@@ -42,10 +44,7 @@ export function GroupRow({ name, member, createdAt, total }: GroupRowProps) {
         {member.slice(0, 5).map((m, i) => (
           <Avatar key={i} className={cn('h-8 w-8 border', { '-ml-2': i !== 0 })}>
             <AvatarImage src={m.imageUrl} alt={`${m.firstName} ${m.lastName}`} />
-            <AvatarFallback
-              className="text-sm uppercase"
-              style={{ backgroundColor: ['#fde68a', '#bbf7d0', '#ddd6fe', '#fecdd3'][randomNumBetween(0, 3)] }}
-            >
+            <AvatarFallback className="text-sm uppercase" style={{ backgroundColor: m.profileBgColor }}>
               {m.firstName[0] + m.lastName[0]}
             </AvatarFallback>
           </Avatar>
@@ -62,6 +61,30 @@ export function GroupRow({ name, member, createdAt, total }: GroupRowProps) {
         <Button variant="ghost" size="icon">
           <Ellipsis className="h-4 w-4" />
         </Button>
+      </div>
+    </li>
+  )
+}
+
+function GroupRowPlaceholder() {
+  return (
+    <li className="flex items-center gap-4 rounded-xl border border-border p-4">
+      <div className="flex-[0.6] overflow-hidden lg:flex-[0.3]">
+        <div className="h-4 w-3/5 animate-pulse rounded-lg bg-muted-foreground/15" />
+        <div className="mt-2 block h-3 w-2/5 animate-pulse rounded-lg bg-muted-foreground/15 lg:hidden" />
+      </div>
+      <div className="hidden flex-[0.3] items-center lg:flex">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <Avatar key={i} className={cn('h-8 w-8 border bg-background', { '-ml-2': i !== 0 })}>
+            <AvatarFallback className="animate-pulse bg-muted-foreground/15" />
+          </Avatar>
+        ))}
+      </div>
+      <div className="hidden flex-[0.2] lg:block">
+        <div className="h-4 w-3/5 animate-pulse rounded-lg bg-muted-foreground/15" />
+      </div>
+      <div className="flex flex-[0.4] items-center justify-between lg:flex-[0.2]">
+        <div className="h-4 w-2/5 animate-pulse rounded-lg bg-muted-foreground/15" />
       </div>
     </li>
   )

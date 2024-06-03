@@ -23,7 +23,7 @@ export default function Groups() {
           <Plus className="h-4 w-4" /> New Group
         </Button>
       </div>
-      <GroupWrapper>
+      <GroupWrapper loading={isPending}>
         {groupData.map((group, i) => (
           <GroupRow
             key={i}
