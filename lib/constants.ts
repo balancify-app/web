@@ -17,3 +17,11 @@ export const ROUTES = {
     HOME: '/portal',
   },
 }
+
+export const LOCALSTORAGE_KEYS = {
+  DESKTOP_NAV_TOGGLE: 'desktop_nav_toggle',
+}
+
+export const QUERY_KEYS = {
+  GROUPS: 'groups',
+}

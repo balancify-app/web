@@ -9,6 +9,8 @@ import { basisGrotesqueArabic } from '@/lib/font'
 import './globals.css'
 import { cn } from '@/lib/utils'
 
+import AppProviders from '@/components/AppProviders'
+
 dayjs.extend(advancedFormat)
 
 export const metadata: Metadata = {
@@ -23,9 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={cn('min-h-dvh font-sans antialiased', basisGrotesqueArabic.variable)}>{children}</body>
-      </html>
+      <AppProviders>
+        <html lang="en">
+          <body className={cn('min-h-dvh font-sans antialiased', basisGrotesqueArabic.variable)}>{children}</body>
+        </html>
+      </AppProviders>
     </ClerkProvider>
   )
 }

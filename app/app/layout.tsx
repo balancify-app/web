@@ -22,7 +22,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           user={user}
           userLoaded={userLoaded}
         />
-        <main className="relative min-h-dvh w-full overflow-auto pb-20 sm:pb-0">
+        <main className="relative min-h-dvh w-full overflow-auto">
           <NotificationBar />
           {children}
           <MobileNav appLinks={appLinks} pathname={pathname} />

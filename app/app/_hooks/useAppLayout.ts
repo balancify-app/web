@@ -2,8 +2,10 @@
 
 import { ROUTES } from '@/lib/constants'
 import { useUser } from '@clerk/nextjs'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { LayoutDashboard, LucideIcon, PieChart, Settings, User, Users } from 'lucide-react'
+import { useAtom } from 'jotai'
+import { desktopNavToggleAtom } from '@/repositories/layout'
 
 export type AppLinkType = {
   title: string
@@ -13,7 +15,7 @@ export type AppLinkType = {
 
 export default function useAppLayout() {
   const { user, isLoaded: userLoaded } = useUser()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useAtom(desktopNavToggleAtom)
 
   const appLinks: AppLinkType[] = useMemo(
     () => [
