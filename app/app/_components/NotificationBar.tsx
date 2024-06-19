@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { UserButton } from '@clerk/nextjs'
-import { Bell } from 'lucide-react'
+import { LuBell } from 'react-icons/lu'
 
 const BAR_HEIGHT = 'h-12'
 
@@ -13,7 +13,7 @@ export default function NotificationBar() {
           <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border block sm:hidden' } }} />
         </div>
         <Button variant="ghost" size="icon">
-          <Bell className="h-4 w-4 flex-shrink-0" />
+          <LuBell className="h-4 w-4 flex-shrink-0" />
         </Button>
       </div>
       <div className={BAR_HEIGHT} />

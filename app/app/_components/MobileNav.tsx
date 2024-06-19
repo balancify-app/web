@@ -13,7 +13,7 @@ export default function MobileNav({ appLinks, pathname }: MobileNavProps) {
     <>
       <nav className="fixed bottom-0 left-0 right-0 block h-20 p-2 pt-0 sm:hidden">
         <div className="relative flex h-full w-full items-center justify-between overflow-hidden rounded-lg border bg-white px-4 shadow-md">
-          {appLinks.map(({ Icon, link, title }) => (
+          {appLinks.map(({ Icon, SelectedIcon, link, title }) => (
             <div className="flex flex-col items-center justify-center" key={title}>
               <Button
                 size="icon"
@@ -24,7 +24,8 @@ export default function MobileNav({ appLinks, pathname }: MobileNavProps) {
                 })}
               >
                 <Link href={link}>
-                  <Icon className="h-4 w-4 flex-shrink-0" />
+                  <Icon className={cn('hidden h-4 w-4 flex-shrink-0', { block: link !== pathname })} />
+                  <SelectedIcon className={cn('hidden h-4 w-4 flex-shrink-0', { block: link === pathname })} />
                 </Link>
               </Button>
               <span

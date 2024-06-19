@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { GroupMember } from '@/services/group.model'
-import { Ellipsis } from 'lucide-react'
+import { LuMoreHorizontal } from 'react-icons/lu'
 
 export function GroupWrapper({
   children,
@@ -59,7 +59,7 @@ export function GroupRow({ name, member, createdAt, total }: GroupRowProps) {
       <div className="flex flex-[0.4] items-center justify-between lg:flex-[0.2]">
         <p>{total}</p>
         <Button variant="ghost" size="icon">
-          <Ellipsis className="h-4 w-4" />
+          <LuMoreHorizontal className="h-4 w-4" />
         </Button>
       </div>
     </li>

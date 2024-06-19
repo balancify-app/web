@@ -14,7 +14,7 @@ const nextConfig = {
       fullUrl: true,
     },
   },
-  transpilePackages: ['lucide-react'],
+  transpilePackages: ['react-icons'],
   images: {
     remotePatterns: [
       {
