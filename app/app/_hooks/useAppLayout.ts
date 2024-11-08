@@ -2,45 +2,57 @@
 
 import { ROUTES } from '@/lib/constants'
 import { useUser } from '@clerk/nextjs'
-import { useMemo, useState } from 'react'
-import { LayoutDashboard, LucideIcon, PieChart, Settings, User, Users } from 'lucide-react'
+import { useMemo } from 'react'
+import { RiDashboardLine, RiDashboardFill } from 'react-icons/ri'
+import { AiOutlinePieChart, AiFillPieChart } from 'react-icons/ai'
+import { HiOutlineUser, HiUser, HiOutlineUsers, HiUsers } from 'react-icons/hi2'
+import { IoSettingsOutline, IoSettings } from 'react-icons/io5'
+import { useAtom } from 'jotai'
+import { desktopNavToggleAtom } from '@/repositories/layout'
+import { IconType } from 'react-icons/lib'
 
 export type AppLinkType = {
   title: string
   link: string
-  Icon: LucideIcon
+  Icon: IconType
+  SelectedIcon: IconType
 }
 
 export default function useAppLayout() {
   const { user, isLoaded: userLoaded } = useUser()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useAtom(desktopNavToggleAtom)
 
   const appLinks: AppLinkType[] = useMemo(
     () => [
       {
         title: 'Dashboard',
         link: ROUTES.APP.DASHBOARD,
-        Icon: LayoutDashboard,
+        Icon: RiDashboardLine,
+        SelectedIcon: RiDashboardFill,
       },
       {
         title: 'Expenses',
         link: ROUTES.APP.EXPENSES,
-        Icon: PieChart,
+        Icon: AiOutlinePieChart,
+        SelectedIcon: AiFillPieChart,
       },
       {
         title: 'Groups',
         link: ROUTES.APP.GROUPS,
-        Icon: Users,
+        Icon: HiOutlineUsers,
+        SelectedIcon: HiUsers,
       },
       {
         title: 'Friends',
         link: ROUTES.APP.FRIENDS,
-        Icon: User,
+        Icon: HiOutlineUser,
+        SelectedIcon: HiUser,
       },
       {
         title: 'Settings',
         link: ROUTES.APP.SETTINGS,
-        Icon: Settings,
+        Icon: IoSettingsOutline,
+        SelectedIcon: IoSettings,
       },
     ],
     [],

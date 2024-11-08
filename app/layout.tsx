@@ -1,19 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter as FontSans } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 
 import dayjs from 'dayjs'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
 
+import { basisGrotesqueArabic } from '@/lib/font'
+
 import './globals.css'
 import { cn } from '@/lib/utils'
 
-dayjs.extend(advancedFormat)
+import AppProviders from '@/components/AppProviders'
 
-const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-})
+dayjs.extend(advancedFormat)
 
 export const metadata: Metadata = {
   title: 'Balancify',
@@ -27,9 +25,11 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={cn('min-h-dvh font-sans antialiased', fontSans.variable)}>{children}</body>
-      </html>
+      <AppProviders>
+        <html lang="en">
+          <body className={cn('min-h-dvh font-sans antialiased', basisGrotesqueArabic.variable)}>{children}</body>
+        </html>
+      </AppProviders>
     </ClerkProvider>
   )
 }

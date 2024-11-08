@@ -13,7 +13,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <TooltipProvider delayDuration={0}>
-      <div className="flex w-full gap-6 overflow-hidden">
+      <div className="flex max-h-dvh min-h-dvh w-full gap-6 overflow-hidden">
         <DesktopNav
           appLinks={appLinks}
           isCollapsed={isCollapsed}
@@ -22,7 +22,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           user={user}
           userLoaded={userLoaded}
         />
-        <main className="relative min-h-dvh w-full overflow-auto pb-20 sm:pb-0">
+        <main className="relative min-h-dvh w-full overflow-auto">
           <NotificationBar />
           {children}
           <MobileNav appLinks={appLinks} pathname={pathname} />

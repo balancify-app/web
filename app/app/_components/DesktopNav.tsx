@@ -27,7 +27,7 @@ export default function DesktopNav({
   return (
     <nav
       className={cn(
-        'relative hidden flex-shrink-0 flex-col  justify-between border-r p-4 transition-all duration-300 sm:flex',
+        'relative hidden flex-shrink-0 flex-col justify-between border-r p-4 transition-all duration-300 sm:flex',
         {
           'w-[70px]': isCollapsed,
           'w-[250px]': !isCollapsed,
@@ -35,7 +35,9 @@ export default function DesktopNav({
       )}
     >
       <div>
-        <h1 className={cn('overflow-hidden text-lg font-bold', { hidden: isCollapsed })}>Balancify</h1>
+        <h1 className={cn('overflow-hidden whitespace-nowrap text-lg font-bold', { hidden: isCollapsed })}>
+          Balancify <span className=" text-xs font-normal text-muted-foreground">v{process.env.version}</span>
+        </h1>
         <h1 className={cn('hidden text-center text-lg font-bold', { block: isCollapsed })}>B</h1>
       </div>
       <div className={cn('flex flex-col gap-2 overflow-hidden', { 'items-center': isCollapsed })}>
