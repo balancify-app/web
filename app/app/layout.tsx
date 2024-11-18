@@ -6,10 +6,20 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import DesktopNav from './_components/DesktopNav'
 import MobileNav from './_components/MobileNav'
 import NotificationBar from './_components/NotificationBar'
+import { useEffect, useState } from 'react'
+import InitialLoader from '@/components/InitialLoader'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { isCollapsed, setIsCollapsed, appLinks, userLoaded, user } = useAppLayout()
+
+  const [isServer, setIsServer] = useState(false)
+
+  useEffect(() => {
+    setIsServer(true)
+  }, [])
+
+  if (!isServer) return <InitialLoader />
 
   return (
     <TooltipProvider delayDuration={0}>
