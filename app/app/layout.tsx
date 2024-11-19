@@ -7,37 +7,40 @@ import DesktopNav from './_components/DesktopNav'
 import MobileNav from './_components/MobileNav'
 import NotificationBar from './_components/NotificationBar'
 import { useEffect, useState } from 'react'
-import InitialLoader from '@/components/InitialLoader'
+import Splash from '@/components/Splash'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { isCollapsed, setIsCollapsed, appLinks, userLoaded, user } = useAppLayout()
 
-  const [isServer, setIsServer] = useState(false)
+  const [isServer, setIsServer] = useState(true)
 
   useEffect(() => {
-    setIsServer(true)
+    const timerId = setTimeout(() => setIsServer(false), 300)
+
+    return () => clearTimeout(timerId)
   }, [])
 
-  if (!isServer) return <InitialLoader />
-
   return (
-    <TooltipProvider delayDuration={0}>
-      <div className="flex max-h-dvh min-h-dvh w-full gap-6 overflow-hidden">
-        <DesktopNav
-          appLinks={appLinks}
-          isCollapsed={isCollapsed}
-          pathname={pathname}
-          setIsCollapsed={setIsCollapsed}
-          user={user}
-          userLoaded={userLoaded}
-        />
-        <main className="relative min-h-dvh w-full overflow-auto">
-          <NotificationBar />
-          {children}
-          <MobileNav appLinks={appLinks} pathname={pathname} />
-        </main>
-      </div>
-    </TooltipProvider>
+    <>
+      <TooltipProvider delayDuration={0}>
+        <div className="flex max-h-dvh min-h-dvh w-full gap-6 overflow-hidden">
+          <DesktopNav
+            appLinks={appLinks}
+            isCollapsed={isCollapsed}
+            pathname={pathname}
+            setIsCollapsed={setIsCollapsed}
+            user={user}
+            userLoaded={userLoaded}
+          />
+          <main className="relative min-h-dvh w-full overflow-auto">
+            <NotificationBar />
+            {children}
+            <MobileNav appLinks={appLinks} pathname={pathname} />
+          </main>
+        </div>
+      </TooltipProvider>
+      <Splash show={isServer} />
+    </>
   )
 }

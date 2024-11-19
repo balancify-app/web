@@ -6,6 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { UserButton } from '@clerk/nextjs'
 import { UserResource } from '@clerk/types'
 import { Dispatch, SetStateAction } from 'react'
+import { motion, Variants } from 'motion/react'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -14,6 +15,15 @@ type DesktopNavProps = {
   userLoaded: boolean
   user: UserResource | null | undefined
   setIsCollapsed: Dispatch<SetStateAction<boolean>>
+}
+
+const navVariants: Variants = {
+  open: {
+    width: 250,
+  },
+  close: {
+    width: 70,
+  },
 }
 
 export default function DesktopNav({
@@ -25,14 +35,11 @@ export default function DesktopNav({
   setIsCollapsed,
 }: DesktopNavProps) {
   return (
-    <nav
-      className={cn(
-        'relative hidden flex-shrink-0 flex-col justify-between border-r p-4 transition-all duration-300 sm:flex',
-        {
-          'w-[70px]': isCollapsed,
-          'w-[250px]': !isCollapsed,
-        },
-      )}
+    <motion.nav
+      className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 sm:flex"
+      variants={navVariants}
+      initial={false}
+      animate={isCollapsed ? 'close' : 'open'}
     >
       <div>
         <h1 className={cn('overflow-hidden whitespace-nowrap text-lg font-bold', { hidden: isCollapsed })}>
@@ -107,6 +114,6 @@ export default function DesktopNav({
           <p>{isCollapsed ? 'Open' : 'Close'} sidebar</p>
         </TooltipContent>
       </Tooltip>
-    </nav>
+    </motion.nav>
   )
 }
