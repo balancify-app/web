@@ -36,7 +36,7 @@ export default function DesktopNav({
 }: DesktopNavProps) {
   return (
     <motion.nav
-      className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 sm:flex"
+      className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 md:flex"
       variants={navVariants}
       initial={false}
       animate={isCollapsed ? 'close' : 'open'}
@@ -69,17 +69,22 @@ export default function DesktopNav({
           </Tooltip>
         ))}
       </div>
-      <div className="flex h-9 items-center gap-4">
+      <div className="flex h-9 items-center gap-2">
         {userLoaded ? (
           <>
             <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border' } }} />
-            <h1
-              className={cn('flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold', {
+            <div
+              className={cn('flex flex-col overflow-hidden', {
                 hidden: isCollapsed,
               })}
             >
-              {user?.firstName}
-            </h1>
+              <h1 className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold">
+                {user?.firstName}
+              </h1>
+              <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">
+                {user?.primaryEmailAddress?.emailAddress}
+              </p>
+            </div>
           </>
         ) : (
           <>
@@ -91,7 +96,7 @@ export default function DesktopNav({
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            className=" group absolute right-0 top-1/2 z-10 flex h-14 w-8 -translate-y-1/2 translate-x-full cursor-pointer items-center justify-center"
+            className="group absolute right-0 top-1/2 z-10 flex h-14 w-8 -translate-y-1/2 translate-x-full cursor-pointer items-center justify-center"
             onClick={() => setIsCollapsed((p) => !p)}
           >
             <div className="relative h-6 w-1 translate-y-1">

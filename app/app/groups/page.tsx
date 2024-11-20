@@ -11,15 +11,15 @@ export default function Groups() {
 
   return (
     <div className="container pb-4">
-      <div className="mt-8 flex items-center justify-between sm:mt-0">
+      <div className="mt-8 flex items-center justify-between md:mt-0">
         <h1 className="text-3xl font-bold">Groups</h1>
-        <Button className="gap-4 sm:hidden">
+        <Button className="gap-2 md:hidden">
           <LuPlus className="h-4 w-4" /> New Group
         </Button>
       </div>
       <div className="my-6 flex items-center justify-between gap-4">
-        <Input className="sm:max-w-sm" placeholder="Search..." type="search" />
-        <Button className="hidden gap-4 sm:flex">
+        <Input className="md:max-w-sm" placeholder="Search..." type="search" />
+        <Button className="hidden gap-2 md:flex">
           <LuPlus className="h-4 w-4" /> New Group
         </Button>
       </div>
