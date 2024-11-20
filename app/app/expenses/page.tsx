@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LuPlus } from 'react-icons/lu'
+import { ExpenseCard, ExpenseWrapper } from './_components/ExpenseGrid'
 
 export default function Expenses() {
   return (
@@ -17,6 +18,12 @@ export default function Expenses() {
           <LuPlus className="h-4 w-4" /> Add Expense
         </Button>
       </div>
+      <ExpenseWrapper loading>
+        <ExpenseCard />
+        <ExpenseCard />
+        <ExpenseCard />
+        <ExpenseCard />
+      </ExpenseWrapper>
     </div>
   )
 }

@@ -25,13 +25,7 @@ export default function Groups() {
       </div>
       <GroupWrapper loading={isPending}>
         {groupData.map((group, i) => (
-          <GroupRow
-            key={i}
-            createdAt={group.createdAt}
-            member={group.members}
-            name={group.name}
-            total={group.totalSpent}
-          />
+          <GroupRow key={i} {...group} />
         ))}
       </GroupWrapper>
     </div>
