@@ -102,16 +102,16 @@ export default function DesktopNav({
             <div className="relative h-6 w-1 translate-y-1">
               <span
                 className={cn(
-                  'absolute left-0 top-0 inline-block h-3 w-full origin-top rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-gray-500',
+                  'absolute left-0 top-0 h-3 w-full origin-top rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-muted-foreground',
                   { 'group-hover:-rotate-[20deg]': isCollapsed, 'group-hover:rotate-[20deg]': !isCollapsed },
                 )}
-              ></span>
+              />
               <span
                 className={cn(
-                  'absolute bottom-0 left-0 inline-block h-3 w-full origin-bottom -translate-y-1 rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-gray-500',
+                  'absolute bottom-0 left-0 h-3 w-full origin-bottom -translate-y-1 rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-muted-foreground',
                   { 'group-hover:rotate-[20deg]': isCollapsed, 'group-hover:-rotate-[20deg]': !isCollapsed },
                 )}
-              ></span>
+              />
             </div>
           </button>
         </TooltipTrigger>

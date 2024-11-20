@@ -7,7 +7,7 @@ import DesktopNav from './_components/DesktopNav'
 import MobileNav from './_components/MobileNav'
 import NotificationBar from './_components/NotificationBar'
 import { useEffect, useState } from 'react'
-import Splash from '@/components/Splash'
+import Splash from './_components/Splash'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
