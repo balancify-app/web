@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import AvatarStack from '@/components/AvatarStack'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import { Group } from '@/services/group.model'
 import { LuMoreHorizontal } from 'react-icons/lu'
 
@@ -33,20 +33,14 @@ export function GroupRow({ name, members, createdAt, totalSpent }: Group) {
           {members.length} members • {createdAt}
         </p>
       </div>
-      <div className="hidden flex-[0.3] items-center lg:flex">
-        {members.slice(0, 5).map((m, i) => (
-          <Avatar key={i} className={cn('h-8 w-8 border', { '-ml-2': i !== 0 })}>
-            <AvatarImage src={m.imageUrl} alt={`${m.firstName} ${m.lastName}`} />
-            <AvatarFallback className="text-sm uppercase" style={{ backgroundColor: m.profileBgColor }}>
-              {m.firstName[0] + m.lastName[0]}
-            </AvatarFallback>
-          </Avatar>
-        ))}
-        {members.length > 5 ? (
-          <Avatar className="-ml-2 h-8 w-8 border">
-            <AvatarFallback className="text-sm">+{members.length - 5}</AvatarFallback>
-          </Avatar>
-        ) : null}
+      <div className="hidden flex-[0.3] lg:block">
+        <AvatarStack
+          items={members.map((m) => ({
+            imageSrc: m.imageUrl,
+            initial: m.firstName[0] + m.lastName[0],
+            bgColor: m.profileBgColor,
+          }))}
+        />
       </div>
       <p className="hidden flex-[0.2] lg:block">{createdAt}</p>
       <div className="flex flex-[0.4] items-center justify-between lg:flex-[0.2]">
@@ -68,7 +62,7 @@ function GroupRowPlaceholder() {
       </div>
       <div className="hidden flex-[0.3] items-center lg:flex">
         {Array.from({ length: 3 }).map((_, i) => (
-          <Avatar key={i} className={cn('h-8 w-8 border bg-background', { '-ml-2': i !== 0 })}>
+          <Avatar key={i} className="-ml-2 h-8 w-8 border bg-background first:ml-0">
             <AvatarFallback className="animate-pulse bg-muted-foreground/15" />
           </Avatar>
         ))}

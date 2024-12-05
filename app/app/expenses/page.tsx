@@ -1,9 +1,14 @@
+'use client'
+
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LuPlus } from 'react-icons/lu'
 import { ExpenseCard, ExpenseWrapper } from './_components/ExpenseGrid'
+import useExpense from './_hooks/useExpense'
 
 export default function Expenses() {
+  const { expenseData, isPending } = useExpense()
+
   return (
     <div className="container">
       <div className="mt-8 flex items-center justify-between md:mt-0">
@@ -18,11 +23,10 @@ export default function Expenses() {
           <LuPlus className="h-4 w-4" /> Add Expense
         </Button>
       </div>
-      <ExpenseWrapper loading>
-        <ExpenseCard />
-        <ExpenseCard />
-        <ExpenseCard />
-        <ExpenseCard />
+      <ExpenseWrapper loading={isPending}>
+        {expenseData.map((expense, i) => (
+          <ExpenseCard key={i} {...expense} />
+        ))}
       </ExpenseWrapper>
     </div>
   )
