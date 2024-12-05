@@ -10,7 +10,7 @@ export default function Expenses() {
   const { expenseData, isPending } = useExpense()
 
   return (
-    <div className="container">
+    <div className="container pb-4">
       <div className="mt-8 flex items-center justify-between md:mt-0">
         <h1 className="text-3xl font-bold">Expenses</h1>
         <Button className="gap-2 md:hidden">

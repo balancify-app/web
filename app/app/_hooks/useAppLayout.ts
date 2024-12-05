@@ -1,8 +1,8 @@
 'use client'
 
 import { ROUTES } from '@/lib/constants'
-import { useUser } from '@clerk/nextjs'
-import { useMemo } from 'react'
+import { useClerk, useUser } from '@clerk/nextjs'
+import { useEffect, useMemo } from 'react'
 import { RiDashboardLine, RiDashboardFill } from 'react-icons/ri'
 import { AiOutlinePieChart, AiFillPieChart } from 'react-icons/ai'
 import { HiOutlineUser, HiUser, HiOutlineUsers, HiUsers } from 'react-icons/hi2'
@@ -21,6 +21,7 @@ export type AppLinkType = {
 export default function useAppLayout() {
   const { user, isLoaded: userLoaded } = useUser()
   const [isCollapsed, setIsCollapsed] = useAtom(desktopNavToggleAtom)
+  const { mountUserButton, unmountUserButton } = useClerk()
 
   const appLinks: AppLinkType[] = useMemo(
     () => [
@@ -57,6 +58,17 @@ export default function useAppLayout() {
     ],
     [],
   )
+
+  useEffect(() => {
+    const useBtn: HTMLDivElement | null = document.querySelector('#user-button')
+
+    if (!useBtn) return
+
+    mountUserButton(useBtn)
+
+    return () => unmountUserButton(useBtn)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return {
     isCollapsed,
