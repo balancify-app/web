@@ -13,10 +13,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const { isCollapsed, setIsCollapsed, appLinks, userLoaded, user } = useAppLayout()
 
-  const [isServer, setIsServer] = useState(true)
+  const [isInitialLoading, setIsInitialLoading] = useState(true)
 
   useEffect(() => {
-    const timerId = setTimeout(() => setIsServer(false), 300)
+    const timerId = setTimeout(() => setIsInitialLoading(false), 300)
 
     return () => clearTimeout(timerId)
   }, [])
@@ -40,7 +40,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </main>
         </div>
       </TooltipProvider>
-      <Splash show={isServer} />
+      <Splash show={isInitialLoading} />
     </>
   )
 }

@@ -3,8 +3,9 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LuPlus } from 'react-icons/lu'
-import { GroupRow, GroupWrapper } from './_components/GroupTable'
 import useGroup from './_hooks/useGroup'
+import GroupWrapper from './_components/GroupWrapper'
+import GroupRow from './_components/GroupRow'
 
 export default function Groups() {
   const { isPending, groupData } = useGroup()

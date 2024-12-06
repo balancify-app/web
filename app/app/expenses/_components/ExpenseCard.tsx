@@ -1,27 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 import AvatarStack from '@/components/AvatarStack'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { Expense } from '@/services/expense.model'
 
-export function ExpenseWrapper({
-  children,
-  loading,
-}: Readonly<{
-  children?: React.ReactNode
-  loading: boolean
-}>) {
-  return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {loading ? Array.from({ length: 3 }).map((_, i) => <ExpenseCardPlaceholder key={i} />) : children}
-    </div>
-  )
-}
-
-export function ExpenseCard({
+export default function ExpenseCard({
   name,
   createdAt,
   icon,
@@ -80,40 +64,6 @@ export function ExpenseCard({
         </div>
         <p className="text-sm text-muted-foreground">{Math.round((totalOwe / totalCost) * 100)}%</p>
       </CardFooter>
-    </Card>
-  )
-}
-
-export function ExpenseCardPlaceholder() {
-  return (
-    <Card className="animate-pulse overflow-hidden shadow-none">
-      <CardHeader className="flex-row items-center gap-4 space-y-0 border-b p-4">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-muted-foreground/15" />
-        <div className="flex flex-1 flex-col overflow-hidden">
-          <CardTitle className="mb-2 h-3 w-3/5 rounded-lg bg-muted-foreground/15" />
-          <CardDescription className="h-3 w-4/5 rounded-lg bg-muted-foreground/15" />
-        </div>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2 p-4">
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-16 rounded-lg bg-muted-foreground/15" />
-          <div className="h-3 w-20 rounded-lg bg-muted-foreground/15" />
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-16 rounded-lg bg-muted-foreground/15" />
-          <div className="flex items-center">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <Avatar key={i} className="-ml-2 h-6 w-6 border bg-background first:ml-0">
-                <AvatarFallback className="animate-pulse bg-muted-foreground/15" />
-              </Avatar>
-            ))}
-          </div>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="h-3 w-16 rounded-lg bg-muted-foreground/15" />
-          <div className="h-6 w-14 rounded-lg bg-muted-foreground/15" />
-        </div>
-      </CardContent>
     </Card>
   )
 }
