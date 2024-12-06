@@ -54,7 +54,7 @@ export function ExpenseCard({
           <AvatarStack
             items={members.map((m) => ({
               imageSrc: m.imageUrl,
-              initial: m.firstName[0],
+              initial: m.firstName[0] + m.lastName[0],
               bgColor: m.profileBgColor,
             }))}
             className="-ml-1 h-5 w-5 border-0 shadow-none"

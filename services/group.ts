@@ -1,21 +1,23 @@
 import dayjs from 'dayjs'
 import { ApiService } from './api'
-import { GetGroupListParams, Group, GroupListResult, GroupMember } from './group.model'
+import { Group, GroupListResult, Person } from './group.model'
 import { faker } from '@faker-js/faker'
 import { ResponseResult } from './types'
-import { DEFAULT_DATE_FORMAT } from '@/lib/constants'
+import { BG_COLORS, DEFAULT_DATE_FORMAT } from '@/lib/constants'
 
 export default class GroupService extends ApiService {
-  async getGroups(params: GetGroupListParams): Promise<ResponseResult<GroupListResult>> {
+  // async getGroups(params: GetGroupListParams): Promise<ResponseResult<GroupListResult>> {
+  async getGroups(): Promise<ResponseResult<GroupListResult>> {
     const fakeData: Group[] = Array.from({ length: 10 }, () => ({
       name: faker.word.noun(),
       createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
-      members: Array.from({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
+      members: Array.from<number, Person>({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
-        imageUrl: faker.datatype.boolean() ? faker.image.avatar() : undefined,
-        profileBgColor: ['#fde68a', '#bbf7d0', '#ddd6fe', '#fecdd3'][faker.number.int({ min: 0, max: 3 })],
-      })) as GroupMember[],
+        imageUrl: faker.image.avatar(),
+        profileBgColor: BG_COLORS[faker.number.int({ min: 0, max: BG_COLORS.length - 1 })],
+        email: faker.internet.email(),
+      })),
       totalSpent: faker.finance.amount({ min: 5, max: 100, dec: 2, symbol: '$' }),
     }))
 
