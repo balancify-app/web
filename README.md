@@ -12,7 +12,7 @@ The all-in-one app for splitting bills and tracking group expenses. Keep everyon
 
 ## Requirement
 
-Node >=v20
+Node >=v18
 
 ## Installation
 
