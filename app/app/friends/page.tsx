@@ -3,8 +3,9 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { LuPlus } from 'react-icons/lu'
-import { FriendCard, FriendsWrapper } from './_components/FriendsGrid'
 import useFriend from './_hooks/useFriend'
+import FriendsWrapper from './_components/FriendsWrapper'
+import FriendCard from './_components/FriendCard'
 
 export default function Friends() {
   const { isPending, friendData } = useFriend()

@@ -4,23 +4,9 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Person } from '@/services/group.model'
 import { HiOutlineDotsVertical } from 'react-icons/hi'
 
-export function FriendsWrapper({
-  children,
-  loading,
-}: Readonly<{
-  children?: React.ReactNode
-  loading: boolean
-}>) {
+export default function FriendCard({ imageUrl, firstName, lastName, email, profileBgColor }: Person) {
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {loading ? null : children}
-    </div>
-  )
-}
-
-export function FriendCard({ imageUrl, firstName, lastName, email, profileBgColor }: Person) {
-  return (
-    <Card>
+    <Card className="overflow-hidden shadow-none">
       <CardContent className="flex items-center gap-2 p-4">
         <Avatar>
           <AvatarImage src={imageUrl} alt={firstName + ' ' + lastName} />
