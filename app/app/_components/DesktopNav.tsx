@@ -6,6 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { UserButton } from '@clerk/nextjs'
 import { UserResource } from '@clerk/types'
 import { Dispatch, SetStateAction } from 'react'
+import { motion, Variants } from 'motion/react'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -14,6 +15,15 @@ type DesktopNavProps = {
   userLoaded: boolean
   user: UserResource | null | undefined
   setIsCollapsed: Dispatch<SetStateAction<boolean>>
+}
+
+const navVariants: Variants = {
+  open: {
+    width: 250,
+  },
+  close: {
+    width: 70,
+  },
 }
 
 export default function DesktopNav({
@@ -25,14 +35,11 @@ export default function DesktopNav({
   setIsCollapsed,
 }: DesktopNavProps) {
   return (
-    <nav
-      className={cn(
-        'relative hidden flex-shrink-0 flex-col justify-between border-r p-4 transition-all duration-300 sm:flex',
-        {
-          'w-[70px]': isCollapsed,
-          'w-[250px]': !isCollapsed,
-        },
-      )}
+    <motion.nav
+      className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 md:flex"
+      variants={navVariants}
+      initial={false}
+      animate={isCollapsed ? 'close' : 'open'}
     >
       <div>
         <h1 className={cn('overflow-hidden whitespace-nowrap text-lg font-bold', { hidden: isCollapsed })}>
@@ -62,17 +69,22 @@ export default function DesktopNav({
           </Tooltip>
         ))}
       </div>
-      <div className="flex h-9 items-center gap-4">
+      <div className="flex h-9 items-center gap-2">
         {userLoaded ? (
           <>
             <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border' } }} />
-            <h1
-              className={cn('flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold', {
+            <div
+              className={cn('flex flex-col overflow-hidden', {
                 hidden: isCollapsed,
               })}
             >
-              {user?.firstName}
-            </h1>
+              <h1 className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold">
+                {user?.firstName}
+              </h1>
+              <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">
+                {user?.primaryEmailAddress?.emailAddress}
+              </p>
+            </div>
           </>
         ) : (
           <>
@@ -84,22 +96,22 @@ export default function DesktopNav({
       <Tooltip>
         <TooltipTrigger asChild>
           <button
-            className=" group absolute right-0 top-1/2 z-10 flex h-14 w-8 -translate-y-1/2 translate-x-full cursor-pointer items-center justify-center"
+            className="group absolute right-0 top-1/2 z-10 flex h-14 w-8 -translate-y-1/2 translate-x-full cursor-pointer items-center justify-center"
             onClick={() => setIsCollapsed((p) => !p)}
           >
             <div className="relative h-6 w-1 translate-y-1">
               <span
                 className={cn(
-                  'absolute left-0 top-0 inline-block h-3 w-full origin-top rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-gray-500',
+                  'absolute left-0 top-0 h-3 w-full origin-top rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-muted-foreground',
                   { 'group-hover:-rotate-[20deg]': isCollapsed, 'group-hover:rotate-[20deg]': !isCollapsed },
                 )}
-              ></span>
+              />
               <span
                 className={cn(
-                  'absolute bottom-0 left-0 inline-block h-3 w-full origin-bottom -translate-y-1 rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-gray-500',
+                  'absolute bottom-0 left-0 h-3 w-full origin-bottom -translate-y-1 rotate-0 rounded-full bg-border transition-all duration-300 group-hover:bg-muted-foreground',
                   { 'group-hover:rotate-[20deg]': isCollapsed, 'group-hover:-rotate-[20deg]': !isCollapsed },
                 )}
-              ></span>
+              />
             </div>
           </button>
         </TooltipTrigger>
@@ -107,6 +119,6 @@ export default function DesktopNav({
           <p>{isCollapsed ? 'Open' : 'Close'} sidebar</p>
         </TooltipContent>
       </Tooltip>
-    </nav>
+    </motion.nav>
   )
 }

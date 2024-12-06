@@ -24,4 +24,17 @@ export const LOCALSTORAGE_KEYS = {
 
 export const QUERY_KEYS = {
   GROUPS: 'groups',
+  EXPENSES: 'expenses',
 }
+
+export const EXPENSE_ICONS = {
+  SUIT_CASE: 'suit-case',
+  COFFEE: 'coffee',
+  FOOD: 'food',
+  STAR: 'star',
+  GIFT: 'gift',
+  HEART: 'heart',
+  BOOKMARK: 'bookmark',
+}
+
+export const DEFAULT_DATE_FORMAT = 'DD MMM YYYY'

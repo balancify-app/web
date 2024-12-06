@@ -3,12 +3,13 @@ import { ApiService } from './api'
 import { GetGroupListParams, Group, GroupListResult, GroupMember } from './group.model'
 import { faker } from '@faker-js/faker'
 import { ResponseResult } from './types'
+import { DEFAULT_DATE_FORMAT } from '@/lib/constants'
 
-export class GroupService extends ApiService {
+export default class GroupService extends ApiService {
   async getGroups(params: GetGroupListParams): Promise<ResponseResult<GroupListResult>> {
-    const fakeData: Group[] = Array.from({ length: 10 }).map(() => ({
+    const fakeData: Group[] = Array.from({ length: 10 }, () => ({
       name: faker.word.noun(),
-      createdAt: dayjs(faker.date.recent()).format('MMMM DD, YYYY'),
+      createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
       members: Array.from({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
