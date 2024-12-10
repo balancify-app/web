@@ -1,9 +1,8 @@
 import AvatarStack from '@/components/AvatarStack'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { cn } from '@/lib/utils'
 import { Expense } from '@/services/expense.model'
+import { useMemo } from 'react'
 
 export default function ExpenseCard({
   name,
@@ -13,9 +12,14 @@ export default function ExpenseCard({
   totalCost,
   totalOwe,
   members,
-  hasSettled,
   createdByYou,
+  createdBy,
 }: Expense) {
+  const settledPercentage = useMemo(
+    () => Math.min(Math.round((totalOwe / totalCost) * 100), 100),
+    [totalCost, totalOwe],
+  )
+
   return (
     <Card className="overflow-hidden shadow-none">
       <CardHeader className="flex-row items-center gap-4 space-y-0 border-b p-4">
@@ -24,45 +28,31 @@ export default function ExpenseCard({
         </div>
         <div className="flex flex-1 flex-col overflow-hidden">
           <CardTitle className="overflow-hidden text-ellipsis whitespace-nowrap pb-1 capitalize">{name}</CardTitle>
-          <CardDescription className="overflow-hidden text-ellipsis whitespace-nowrap">{createdAt}</CardDescription>
+          <CardDescription className="overflow-hidden text-ellipsis whitespace-nowrap text-xs">
+            Paid by {createdByYou ? 'You' : createdBy}
+          </CardDescription>
         </div>
         <h1 className="text-lg font-bold text-foreground">${totalCost}</h1>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 p-4">
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">You Owed:</p>
-          <span className="text-sm font-bold text-foreground">${createdByYou ? 0 : totalOwe}</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">Share With:</p>
-          <AvatarStack
-            items={members.map((m) => ({
-              imageSrc: m.imageUrl,
-              initial: m.firstName[0] + m.lastName[0],
-              bgColor: m.profileBgColor,
-            }))}
-            className="-ml-1 h-5 w-5 border-0 shadow-none"
-          />
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-sm text-muted-foreground">Status:</p>
-          {createdByYou ? (
-            <Badge variant="outline">Paid By You</Badge>
-          ) : (
-            <Badge
-              variant={hasSettled ? 'default' : 'secondary'}
-              className={cn({ 'bg-green-400 text-white': hasSettled })}
-            >
-              {hasSettled ? 'Paid' : 'Unpaid'}
-            </Badge>
-          )}
+      <CardContent className="flex items-center justify-between p-4">
+        <AvatarStack
+          items={members.map((m) => ({
+            imageSrc: m.imageUrl,
+            initial: m.firstName[0] + m.lastName[0],
+            bgColor: m.profileBgColor,
+          }))}
+          className="-ml-2 h-8 w-8 border-0 shadow-none"
+        />
+        <div className="flex flex-col items-end">
+          <p className="font-bold">{settledPercentage}%</p>
+          <p className="text-sm text-muted-foreground">{settledPercentage >= 100 ? 'Settled' : 'Paid'}</p>
         </div>
       </CardContent>
-      <CardFooter className="gap-2 p-4 pt-0">
-        <div className="flex-1">
-          <Progress value={Math.round((totalOwe / totalCost) * 100)} />
-        </div>
-        <p className="text-sm text-muted-foreground">{Math.round((totalOwe / totalCost) * 100)}%</p>
+      <CardFooter className="flex items-center justify-between p-4 pt-0">
+        <p className="text-sm text-muted-foreground">{createdAt}</p>
+        <Button variant="secondary" size="sm" className="shadow-none">
+          View Details
+        </Button>
       </CardFooter>
     </Card>
   )

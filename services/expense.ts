@@ -16,7 +16,7 @@ export default class ExpenseService extends ApiService {
       return {
         name: faker.word.noun(),
         createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
-        createdBy: faker.string.uuid(),
+        createdBy: faker.person.fullName(),
         totalCost: total,
         totalOwe: faker.number.float({ min: 5, max: total, fractionDigits: 2 }),
         members: Array.from<number, Person>({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
