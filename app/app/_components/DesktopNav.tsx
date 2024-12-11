@@ -7,6 +7,7 @@ import { UserButton } from '@clerk/nextjs'
 import { UserResource } from '@clerk/types'
 import { Dispatch, SetStateAction } from 'react'
 import { motion, Variants } from 'motion/react'
+import { Skeleton } from '@/components/ui/skeleton'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -88,8 +89,8 @@ export default function DesktopNav({
           </>
         ) : (
           <>
-            <div className="h-9 w-9 animate-pulse rounded-full bg-border" />
-            <div className={cn('h-4 flex-1 animate-pulse rounded-lg bg-border', { hidden: isCollapsed })} />
+            <Skeleton className="h-10 w-10 rounded-full" />
+            <Skeleton className={cn('h-4 flex-1', { hidden: isCollapsed })} />
           </>
         )}
       </div>

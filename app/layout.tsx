@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 
 import dayjs from 'dayjs'
 import advancedFormat from 'dayjs/plugin/advancedFormat'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import { poppins } from '@/lib/font'
 
@@ -12,6 +13,7 @@ import { cn } from '@/lib/utils'
 import AppProviders from '@/components/AppProviders'
 
 dayjs.extend(advancedFormat)
+dayjs.extend(customParseFormat)
 
 export const metadata: Metadata = {
   title: 'Balancify',

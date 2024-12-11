@@ -41,7 +41,7 @@ export default function ExpenseCard({
             initial: m.firstName[0] + m.lastName[0],
             bgColor: m.profileBgColor,
           }))}
-          className="-ml-2 h-8 w-8 border-0 shadow-none"
+          className="-ml-2 h-8 w-8 border-0"
         />
         <div className="flex flex-col items-end">
           <p className="font-bold">{settledPercentage}%</p>
