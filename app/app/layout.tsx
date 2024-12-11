@@ -8,7 +8,7 @@ import NotificationBar from './_components/NotificationBar'
 import Splash from './_components/Splash'
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const { isCollapsed, appLinks, userLoaded, user, isInitialLoading, pathname, setIsCollapsed } = useAppLayout()
+  const { isCollapsed, appLinks, userLoaded, user, isInitialLoading, pathname, isDark, setIsCollapsed } = useAppLayout()
 
   return (
     <>
@@ -21,9 +21,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             setIsCollapsed={setIsCollapsed}
             user={user}
             userLoaded={userLoaded}
+            isDark={isDark}
           />
           <main className="relative min-h-dvh w-full overflow-auto">
-            <NotificationBar />
+            <NotificationBar isDark={isDark} />
             {children}
             <MobileNav appLinks={appLinks} pathname={pathname} />
           </main>

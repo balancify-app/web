@@ -24,7 +24,7 @@ export default function useAppLayout() {
   const pathname = usePathname()
   const { user, isLoaded: userLoaded } = useUser()
   const [isCollapsed, setIsCollapsed] = useAtom(desktopNavToggleAtom)
-  useTheme()
+  const { isDark } = useTheme()
 
   const appLinks: AppLinkType[] = useMemo(
     () => [
@@ -80,5 +80,6 @@ export default function useAppLayout() {
     appLinks,
     isInitialLoading,
     pathname,
+    isDark,
   }
 }

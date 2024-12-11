@@ -1,10 +1,12 @@
 import { AppThemeType, THEME } from '@/lib/constants'
 import { appThemeAtom } from '@/repositories/layout'
 import { useAtomValue } from 'jotai'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 export default function useTheme() {
   const appTheme = useAtomValue(appThemeAtom)
+
+  const [isDark, setisDark] = useState(false)
 
   useEffect(() => {
     if (appTheme !== THEME.SYSTEM) handleChangeThemeClass(appTheme)
@@ -30,5 +32,10 @@ export default function useTheme() {
     document.documentElement.classList.remove(THEME.DARK)
     document.documentElement.classList.remove(THEME.LIGHT)
     document.documentElement.classList.add(newTheme)
+    setisDark(newTheme === THEME.DARK)
   }, [])
+
+  return {
+    isDark,
+  }
 }

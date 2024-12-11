@@ -8,6 +8,7 @@ import { UserResource } from '@clerk/types'
 import { Dispatch, SetStateAction } from 'react'
 import { motion, Variants } from 'motion/react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { dark } from '@clerk/themes'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -15,6 +16,7 @@ type DesktopNavProps = {
   pathname: string
   userLoaded: boolean
   user: UserResource | null | undefined
+  isDark: boolean
   setIsCollapsed: Dispatch<SetStateAction<boolean>>
 }
 
@@ -33,6 +35,7 @@ export default function DesktopNav({
   pathname,
   userLoaded,
   user,
+  isDark,
   setIsCollapsed,
 }: DesktopNavProps) {
   return (
@@ -73,7 +76,9 @@ export default function DesktopNav({
       <div className="flex h-9 items-center gap-2">
         {userLoaded ? (
           <>
-            <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border' } }} />
+            <UserButton
+              appearance={{ elements: { avatarBox: 'h-9 w-9 border' }, baseTheme: isDark ? dark : undefined }}
+            />
             <div
               className={cn('flex flex-col overflow-hidden', {
                 hidden: isCollapsed,
