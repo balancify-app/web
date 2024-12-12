@@ -1,4 +1,4 @@
-import { AppThemeType, THEME } from '@/lib/constants'
+import { AppTheme, THEME } from '@/lib/constants'
 import { appThemeAtom } from '@/repositories/layout'
 import { useAtomValue } from 'jotai'
 import { useCallback, useEffect, useState } from 'react'
@@ -9,16 +9,16 @@ export default function useTheme() {
   const [isDark, setisDark] = useState(false)
 
   useEffect(() => {
-    if (appTheme !== THEME.SYSTEM) handleChangeThemeClass(appTheme)
-
     if (appTheme === THEME.SYSTEM) {
       const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      handleChangeThemeClass(isDark ? THEME.DARK : THEME.LIGHT)
+      handleChangeThemeClass(isDark ? THEME.DARK : THEME.DARK)
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', catchThemeChanges)
+    } else {
+      handleChangeThemeClass(appTheme)
     }
 
     function catchThemeChanges(event: MediaQueryListEvent) {
-      const newTheme = event.matches ? THEME.DARK : THEME.LIGHT
+      const newTheme = event.matches ? THEME.DARK : THEME.DARK
       handleChangeThemeClass(newTheme)
     }
 
@@ -28,7 +28,7 @@ export default function useTheme() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appTheme])
 
-  const handleChangeThemeClass = useCallback((newTheme: AppThemeType) => {
+  const handleChangeThemeClass = useCallback((newTheme: AppTheme) => {
     document.documentElement.classList.remove(THEME.DARK)
     document.documentElement.classList.remove(THEME.LIGHT)
     document.documentElement.classList.add(newTheme)

@@ -65,6 +65,6 @@ export const THEME = {
   LIGHT: 'light',
   DARK: 'dark',
   SYSTEM: 'system',
-}
+} as const
 
-export type AppThemeType = (typeof THEME)[keyof typeof THEME]
+export type AppTheme = (typeof THEME)[keyof typeof THEME]

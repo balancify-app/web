@@ -1,12 +1,12 @@
-import { THEME } from '@/lib/constants'
+import { AppTheme, THEME } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 import { useMemo } from 'react'
 
 type ThemeDemoProps = {
-  theme?: 'light' | 'dark'
+  theme?: AppTheme
 }
 
-export default function ThemeDemo({ theme = 'light' }: ThemeDemoProps) {
+export default function ThemeDemo({ theme = THEME.LIGHT }: ThemeDemoProps) {
   const { bgColor, fgColor15, fgColor10 } = useMemo(() => {
     if (theme === THEME.LIGHT) {
       return {
@@ -24,7 +24,11 @@ export default function ThemeDemo({ theme = 'light' }: ThemeDemoProps) {
   }, [theme])
 
   return (
-    <div className={cn('h-[150px] w-[250px] overflow-hidden rounded-xl border', bgColor, theme)}>
+    <div
+      className={cn('h-[150px] w-[250px] overflow-hidden rounded-xl', bgColor, theme, {
+        border: theme === THEME.LIGHT,
+      })}
+    >
       <div
         className={cn(
           'relative flex h-full w-full translate-x-[10%] translate-y-[10%] gap-2 rounded-xl p-2',

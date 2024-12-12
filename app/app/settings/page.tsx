@@ -6,6 +6,7 @@ import { Switch } from '@/components/ui/switch'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
 import useSettings from './_hooks/useSettings'
+import { AppTheme, THEME } from '@/lib/constants'
 
 export default function Settings() {
   const { appTheme, setAppTheme } = useSettings()
@@ -46,33 +47,33 @@ export default function Settings() {
         <RadioGroup
           className="flex flex-[2] flex-wrap justify-center gap-4 md:justify-start"
           value={appTheme}
-          onValueChange={setAppTheme}
+          onValueChange={(v: AppTheme) => setAppTheme(v)}
         >
-          <Label htmlFor="theme-light">
+          <Label htmlFor={`theme-${THEME.LIGHT}`}>
             <ThemeDemo />
             <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
-              <RadioGroupItem value="light" id="theme-light" />
+              <RadioGroupItem value={THEME.LIGHT} id={`theme-${THEME.LIGHT}`} />
               <h1>Light</h1>
             </div>
           </Label>
-          <Label htmlFor="theme-dark">
+          <Label htmlFor={`theme-${THEME.DARK}`}>
             <ThemeDemo theme="dark" />
             <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
-              <RadioGroupItem value="dark" id="theme-dark" />
+              <RadioGroupItem value={THEME.DARK} id={`theme-${THEME.DARK}`} />
               <h1>Dark</h1>
             </div>
           </Label>
-          <Label htmlFor="theme-system">
-            <div className="relative h-[150px] w-[250px] overflow-hidden rounded-xl border">
+          <Label htmlFor={`theme-${THEME.SYSTEM}`}>
+            <div className="relative h-[150px] w-[250px] overflow-hidden rounded-xl">
               <div className="absolute left-1/2 top-0 h-full w-full bg-black">
-                <ThemeDemo theme="dark" />
+                <ThemeDemo theme={THEME.DARK} />
               </div>
               <div className="absolute left-0 top-0 h-full w-1/2 overflow-hidden">
-                <ThemeDemo theme="light" />
+                <ThemeDemo theme={THEME.LIGHT} />
               </div>
             </div>
             <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
-              <RadioGroupItem value="system" id="theme-system" />
+              <RadioGroupItem value="system" id={`theme-${THEME.SYSTEM}`} />
               <h1>Auto</h1>
             </div>
           </Label>
