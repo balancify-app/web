@@ -64,12 +64,12 @@ export default function Settings() {
             </div>
           </Label>
           <Label htmlFor={`theme-${THEME.SYSTEM}`}>
-            <div className="relative h-[150px] w-[250px] overflow-hidden rounded-xl">
+            <div className="relative h-[150px] w-[250px] overflow-hidden rounded-xl border">
               <div className="absolute left-1/2 top-0 h-full w-full bg-black">
-                <ThemeDemo theme={THEME.DARK} />
+                <ThemeDemo theme={THEME.DARK} className="border-none" />
               </div>
               <div className="absolute left-0 top-0 h-full w-1/2 overflow-hidden">
-                <ThemeDemo theme={THEME.LIGHT} />
+                <ThemeDemo theme={THEME.LIGHT} className="border-none" />
               </div>
             </div>
             <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">

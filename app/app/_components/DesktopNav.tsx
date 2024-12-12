@@ -9,6 +9,8 @@ import { Dispatch, SetStateAction } from 'react'
 import { motion, Variants } from 'motion/react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { dark } from '@clerk/themes'
+import { useAtomValue } from 'jotai'
+import { isDarkModeAtom } from '@/repositories/layout'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -16,7 +18,6 @@ type DesktopNavProps = {
   pathname: string
   userLoaded: boolean
   user: UserResource | null | undefined
-  isDark: boolean
   setIsCollapsed: Dispatch<SetStateAction<boolean>>
 }
 
@@ -35,9 +36,10 @@ export default function DesktopNav({
   pathname,
   userLoaded,
   user,
-  isDark,
   setIsCollapsed,
 }: DesktopNavProps) {
+  const isDarkMode = useAtomValue(isDarkModeAtom)
+
   return (
     <motion.nav
       className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 md:flex"
@@ -77,7 +79,7 @@ export default function DesktopNav({
         {userLoaded ? (
           <>
             <UserButton
-              appearance={{ elements: { avatarBox: 'h-9 w-9 border' }, baseTheme: isDark ? dark : undefined }}
+              appearance={{ elements: { avatarBox: 'h-9 w-9 border' }, baseTheme: isDarkMode ? dark : undefined }}
             />
             <div
               className={cn('flex flex-col overflow-hidden', {

@@ -4,9 +4,10 @@ import { useMemo } from 'react'
 
 type ThemeDemoProps = {
   theme?: AppTheme
+  className?: string
 }
 
-export default function ThemeDemo({ theme = THEME.LIGHT }: ThemeDemoProps) {
+export default function ThemeDemo({ theme = THEME.LIGHT, className }: ThemeDemoProps) {
   const { bgColor, fgColor15, fgColor10 } = useMemo(() => {
     if (theme === THEME.LIGHT) {
       return {
@@ -24,11 +25,7 @@ export default function ThemeDemo({ theme = THEME.LIGHT }: ThemeDemoProps) {
   }, [theme])
 
   return (
-    <div
-      className={cn('h-[150px] w-[250px] overflow-hidden rounded-xl', bgColor, theme, {
-        border: theme === THEME.LIGHT,
-      })}
-    >
+    <div className={cn('h-[150px] w-[250px] overflow-hidden rounded-xl border', bgColor, theme, className)}>
       <div
         className={cn(
           'relative flex h-full w-full translate-x-[10%] translate-y-[10%] gap-2 rounded-xl p-2',
