@@ -45,26 +45,26 @@ export default function Settings() {
           <p className="text-xs text-muted-foreground">Manage how your app looks</p>
         </div>
         <RadioGroup
-          className="flex flex-[2] flex-wrap justify-center gap-4 md:justify-start"
+          className="flex flex-[2] flex-col flex-wrap gap-4 md:flex-row"
           value={appTheme}
           onValueChange={(v: AppTheme) => setAppTheme(v)}
         >
           <Label htmlFor={`theme-${THEME.LIGHT}`}>
-            <ThemeDemo />
-            <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
+            <ThemeDemo className="hidden md:block" />
+            <div className="mt-2 flex items-center gap-2">
               <RadioGroupItem value={THEME.LIGHT} id={`theme-${THEME.LIGHT}`} />
               <h1>Light</h1>
             </div>
           </Label>
           <Label htmlFor={`theme-${THEME.DARK}`}>
-            <ThemeDemo theme="dark" />
-            <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
+            <ThemeDemo theme="dark" className="hidden md:block" />
+            <div className="mt-2 flex items-center gap-2">
               <RadioGroupItem value={THEME.DARK} id={`theme-${THEME.DARK}`} />
               <h1>Dark</h1>
             </div>
           </Label>
           <Label htmlFor={`theme-${THEME.SYSTEM}`}>
-            <div className="relative h-[150px] w-[250px] overflow-hidden rounded-xl border">
+            <div className="relative hidden h-[150px] w-[250px] overflow-hidden rounded-xl border md:block">
               <div className="absolute left-1/2 top-0 h-full w-full bg-black">
                 <ThemeDemo theme={THEME.DARK} className="border-none" />
               </div>
@@ -72,7 +72,7 @@ export default function Settings() {
                 <ThemeDemo theme={THEME.LIGHT} className="border-none" />
               </div>
             </div>
-            <div className="mt-2 flex items-center justify-center gap-2 md:justify-start">
+            <div className="mt-2 flex items-center gap-2">
               <RadioGroupItem value="system" id={`theme-${THEME.SYSTEM}`} />
               <h1>Auto</h1>
             </div>
