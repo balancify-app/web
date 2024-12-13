@@ -1,7 +1,7 @@
 import AvatarStack from '@/components/AvatarStack'
 import { Button } from '@/components/ui/button'
 import { Group } from '@/services/group.model'
-import { LuMoreHorizontal } from 'react-icons/lu'
+import { LuMoreVertical } from 'react-icons/lu'
 
 export default function GroupRow({ name, members, createdAt, totalSpent }: Group) {
   return (
@@ -25,7 +25,7 @@ export default function GroupRow({ name, members, createdAt, totalSpent }: Group
       <div className="flex flex-[0.4] items-center justify-between lg:flex-[0.2]">
         <p>{totalSpent}</p>
         <Button variant="ghost" size="icon">
-          <LuMoreHorizontal className="h-4 w-4" />
+          <LuMoreVertical className="h-4 w-4" />
         </Button>
       </div>
     </li>
