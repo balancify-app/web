@@ -47,21 +47,21 @@ export default function Settings() {
           value={appTheme}
           onValueChange={(v: AppTheme) => setAppTheme(v)}
         >
-          <Label htmlFor={`theme-${THEME.LIGHT}`}>
+          <Label htmlFor={`theme-${THEME.LIGHT}`} className="cursor-pointer">
             <ThemeDemo className="hidden md:block" />
             <div className="mt-2 flex items-center gap-2">
               <RadioGroupItem value={THEME.LIGHT} id={`theme-${THEME.LIGHT}`} />
               <h1>Light</h1>
             </div>
           </Label>
-          <Label htmlFor={`theme-${THEME.DARK}`}>
+          <Label htmlFor={`theme-${THEME.DARK}`} className="cursor-pointer">
             <ThemeDemo theme="dark" className="hidden md:block" />
             <div className="mt-2 flex items-center gap-2">
               <RadioGroupItem value={THEME.DARK} id={`theme-${THEME.DARK}`} />
               <h1>Dark</h1>
             </div>
           </Label>
-          <Label htmlFor={`theme-${THEME.SYSTEM}`}>
+          <Label htmlFor={`theme-${THEME.SYSTEM}`} className="cursor-pointer">
             <div className="relative hidden h-[150px] w-[250px] overflow-hidden rounded-xl border md:block">
               <div className="absolute left-1/2 top-0 h-full w-full bg-black">
                 <ThemeDemo theme={THEME.DARK} className="border-none" />
