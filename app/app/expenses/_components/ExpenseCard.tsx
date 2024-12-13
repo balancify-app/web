@@ -1,7 +1,9 @@
 import AvatarStack from '@/components/AvatarStack'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { ROUTES } from '@/lib/constants'
 import { Expense } from '@/services/expense.model'
+import Link from 'next/link'
 import { useMemo } from 'react'
 
 export default function ExpenseCard({
@@ -50,8 +52,8 @@ export default function ExpenseCard({
       </CardContent>
       <CardFooter className="flex items-center justify-between p-4 pt-0">
         <p className="text-sm text-muted-foreground">{createdAt}</p>
-        <Button variant="secondary" size="sm" className="shadow-none">
-          View Details
+        <Button variant="secondary" size="sm" className="shadow-none" asChild>
+          <Link href={`${ROUTES.APP.EXPENSES}/${name}`}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>

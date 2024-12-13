@@ -10,7 +10,7 @@ export default class ExpenseService extends ApiService {
   async getExpenses(): Promise<ResponseResult<ExpenseListResult>> {
     const icons = Object.values(EXPENSE_ICONS)
 
-    const fakeData: Expense[] = Array.from({ length: 10 }, (_, i) => {
+    const fakeData = Array.from<number, Expense>({ length: 10 }, (_, i) => {
       const total = faker.number.float({ min: 5, max: 100, fractionDigits: 2 })
 
       return {
