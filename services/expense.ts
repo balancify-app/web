@@ -3,8 +3,8 @@ import { ApiService } from './api'
 import { Expense, ExpenseListResult } from './expense.model'
 import { ResponseResult } from './types'
 import dayjs from 'dayjs'
-import { GroupMember } from './group.model'
-import { DEFAULT_DATE_FORMAT, EXPENSE_ICONS } from '@/lib/constants'
+import { Person } from './group.model'
+import { BG_COLORS, DEFAULT_DATE_FORMAT, EXPENSE_ICONS } from '@/lib/constants'
 
 export default class ExpenseService extends ApiService {
   async getExpenses(): Promise<ResponseResult<ExpenseListResult>> {
@@ -16,18 +16,19 @@ export default class ExpenseService extends ApiService {
       return {
         name: faker.word.noun(),
         createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
-        createdBy: faker.string.uuid(),
+        createdBy: faker.person.fullName(),
         totalCost: total,
         totalOwe: faker.number.float({ min: 5, max: total, fractionDigits: 2 }),
-        members: Array.from({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
+        members: Array.from<number, Person>({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
           firstName: faker.person.firstName(),
           lastName: faker.person.lastName(),
-          imageUrl: faker.datatype.boolean() ? faker.image.avatar() : undefined,
-          profileBgColor: ['#fde68a', '#bbf7d0', '#ddd6fe', '#fecdd3'][faker.number.int({ min: 0, max: 3 })],
-        })) as GroupMember[],
+          imageUrl: faker.image.avatar(),
+          profileBgColor: BG_COLORS[faker.number.int({ min: 0, max: BG_COLORS.length - 1 })],
+          email: faker.internet.email(),
+        })),
         hasSettled: faker.datatype.boolean(),
         icon: icons[faker.number.int({ min: 0, max: icons.length - 1 })],
-        iconBgColor: ['#fde68a', '#bbf7d0', '#ddd6fe', '#fecdd3'][faker.number.int({ min: 0, max: 3 })],
+        iconBgColor: BG_COLORS[faker.number.int({ min: 0, max: BG_COLORS.length - 1 })],
         createdByYou: i === 5,
       }
     })

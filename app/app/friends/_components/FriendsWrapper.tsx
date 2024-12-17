@@ -1,6 +1,6 @@
-import ExpenseCardPlaceholder from './ExpenseCardPlaceholder'
+import FriendCardPlaceholder from './FriendCardPlaceholder'
 
-export default function ExpenseWrapper({
+export default function FriendsWrapper({
   children,
   loading,
 }: Readonly<{
@@ -9,7 +9,7 @@ export default function ExpenseWrapper({
 }>) {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {loading ? Array.from({ length: 3 }, (_, i) => <ExpenseCardPlaceholder key={i} />) : children}
+      {loading ? Array.from({ length: 3 }, (_, i) => <FriendCardPlaceholder key={i} />) : children}
     </div>
   )
 }

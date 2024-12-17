@@ -1,4 +1,4 @@
-import { GroupMember } from './group.model'
+import { Person } from './group.model'
 import { ResponseResultWithPagination } from './types'
 
 export type Expense = {
@@ -6,7 +6,7 @@ export type Expense = {
   createdAt: string
   totalCost: number
   totalOwe: number
-  members: GroupMember[]
+  members: Person[]
   hasSettled: boolean
   createdBy: string
   icon: string

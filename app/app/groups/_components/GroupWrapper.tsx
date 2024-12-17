@@ -15,7 +15,7 @@ export default function GroupWrapper({
         <h1 className="hidden flex-[0.2] text-sm lg:block">Created</h1>
         <h1 className="flex-[0.4] text-sm lg:flex-[0.2]">Total</h1>
       </li>
-      {loading ? Array.from({ length: 3 }).map((_, i) => <GroupRowPlaceholder key={i} />) : children}
+      {loading ? Array.from({ length: 3 }, (_, i) => <GroupRowPlaceholder key={i} />) : children}
     </ul>
   )
 }
