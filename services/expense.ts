@@ -14,6 +14,7 @@ export default class ExpenseService extends ApiService {
       const total = faker.number.float({ min: 5, max: 100, fractionDigits: 2 })
 
       return {
+        id: faker.string.uuid(),
         name: faker.word.noun(),
         createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
         createdBy: faker.person.fullName(),

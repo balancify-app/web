@@ -12,6 +12,7 @@ export type Expense = {
   icon: string
   iconBgColor: string
   createdByYou: boolean
+  id: string
 }
 
 export type ExpenseListResult = ResponseResultWithPagination<Expense[]>
