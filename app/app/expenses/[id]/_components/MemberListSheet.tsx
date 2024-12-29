@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button'
 import MemberListItem from './MemberListItem'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { MemberListProps } from './MemberList'
+import MemberListItemPlaceholder from './MemberListItemPlaceholder'
 
-export default function MemberListSheet() {
+export default function MemberListSheet({ loading, members }: MemberListProps) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -14,13 +16,13 @@ export default function MemberListSheet() {
         <SheetHeader>
           <SheetTitle className="text-left">Members</SheetTitle>
         </SheetHeader>
-        <ul className="mt-6 flex flex-col gap-4">
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-        </ul>
+        {loading ? (
+          <MemberListItemPlaceholder />
+        ) : (
+          <ul className="mt-6 flex flex-col gap-4">
+            {members?.map((member, i) => <MemberListItem key={i} {...member} />)}
+          </ul>
+        )}
       </SheetContent>
     </Sheet>
   )

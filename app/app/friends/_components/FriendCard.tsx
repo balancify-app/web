@@ -6,7 +6,7 @@ import { LuMoreVertical } from 'react-icons/lu'
 
 export default function FriendCard({ imageUrl, firstName, lastName, email, profileBgColor }: Person) {
   return (
-    <Card className="overflow-hidden shadow-none">
+    <Card className="overflow-hidden ">
       <CardContent className="flex items-center gap-4 p-4">
         <Avatar>
           <AvatarImage src={imageUrl} alt={firstName + ' ' + lastName} />

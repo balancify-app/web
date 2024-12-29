@@ -24,7 +24,7 @@ export default function ExpenseCard({
   )
 
   return (
-    <Card className="overflow-hidden shadow-none">
+    <Card className="overflow-hidden ">
       <CardHeader className="flex-row items-center gap-4 space-y-0 border-b p-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-lg" style={{ backgroundColor: iconBgColor }}>
           <img src={`/assets/svgs/icon-${icon}.svg`} className="h-6 w-6" alt="icon" />

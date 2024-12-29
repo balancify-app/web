@@ -1,20 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import MemberListItem from './MemberListItem'
+import { ExpenseDetailsMember } from '@/services/expense.model'
+import MemberListItemPlaceholder from './MemberListItemPlaceholder'
 
-export default function MemberList() {
+export type MemberListProps = {
+  loading: boolean
+  members?: ExpenseDetailsMember[]
+}
+
+export default function MemberList({ loading, members }: MemberListProps) {
   return (
-    <Card className="shadow-none">
+    <Card>
       <CardHeader>
         <CardTitle>Members</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="flex flex-col gap-4">
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-          <MemberListItem firstName="Adam" lastName="Brown" ownedAmount="$5.0" />
-        </ul>
+        {loading ? (
+          <MemberListItemPlaceholder />
+        ) : (
+          <ul className="flex flex-col gap-4">{members?.map((member, i) => <MemberListItem key={i} {...member} />)}</ul>
+        )}
       </CardContent>
     </Card>
   )

@@ -1,14 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Timeline } from '@/services/expense.model'
 import dayjs from 'dayjs'
 
-type TimelineItemProps = {
-  avatarImageUrl?: string
-  createdBy: string
-  date: string
-  events: string
-}
-
-export default function TimelineItem({ avatarImageUrl, createdBy, date, events }: TimelineItemProps) {
+export default function TimelineItem({ createdBy, createdAt, events }: Timeline) {
   return (
     <li className="group flex gap-8">
       <div className="relative w-0.5 translate-y-3 bg-border group-last:bg-transparent">
@@ -17,11 +11,11 @@ export default function TimelineItem({ avatarImageUrl, createdBy, date, events }
       <div className="flex-1 pb-10">
         <div className="flex items-center gap-2">
           <Avatar className="h-5 w-5 border">
-            <AvatarImage src={avatarImageUrl} />
+            <AvatarImage src={createdBy.imageUrl} alt={`${createdBy.firstName} ${createdBy.lastName}`} />
             <AvatarFallback className="text-xs">PS</AvatarFallback>
           </Avatar>
           <h1>
-            {createdBy} - {dayjs(date, 'DD/MM/YYYY').format('DD MMM YYYY, hh:mm A')}
+            {createdBy.firstName} {createdBy.lastName} - {dayjs(createdAt, 'DD/MM/YYYY').format('DD MMM YYYY, hh:mm A')}
           </h1>
         </div>
         <p className="mt-2">{events}</p>

@@ -1,25 +1,49 @@
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import MemberListSheet from './MemberListSheet'
+import { ExpenseDetails } from '@/services/expense.model'
+import ExpenseInfoCardPlaceholder from './ExpenseInfoCardPlaceholder'
 
-export default function ExpenseInfoCard() {
+type ExpenseInfoCardProps = {
+  loading: boolean
+  details?: ExpenseDetails
+}
+
+export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardProps) {
+  if (loading) return <ExpenseInfoCardPlaceholder />
+
   return (
-    <Card className="bg-none from-amber-300 shadow-none md:bg-gradient-to-l">
+    <Card
+      className="bg-none md:bg-gradient-to-l"
+      style={
+        {
+          '--tw-gradient-from': `${details?.iconBgColor} var(--tw-gradient-from-position)`,
+          '--tw-gradient-to': 'rgb(0 0 0 / 0) var(--tw-gradient-to-position)',
+          '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to)',
+        } as React.CSSProperties
+      }
+    >
       <CardContent className="flex flex-col-reverse items-center gap-4 p-6 md:flex-row md:items-start">
         <div className="flex-1 self-stretch">
           <div className="text-center md:text-left">
-            <h1 className="text-xl font-bold capitalize">Lorem, ipsum</h1>
-            <p className="text-xs text-muted-foreground">Added by Person - 12 dec 2024</p>
+            <h1 className="text-xl font-bold capitalize">{details?.name}</h1>
+            <p className="text-xs text-muted-foreground">
+              Added by {details?.createdByYou ? 'You' : details?.createdBy}
+              {' - '}
+              {details?.createdAt}
+            </p>
           </div>
           <div className="mt-8 flex flex-col items-center gap-8 md:mt-10 md:flex-row md:items-start md:gap-0">
             <div className="flex-1">
               <h1 className="hidden text-sm text-muted-foreground md:block">Total</h1>
-              <h1 className="text-3xl font-bold md:text-xl">$100.00</h1>
+              <h1 className="text-3xl font-bold md:text-xl">${details?.totalCost}</h1>
             </div>
-            <div className="flex-1 text-center md:text-left">
-              <h1 className="text-xs text-muted-foreground md:text-sm">You Owed</h1>
-              <h1 className="text-xl font-bold">$100.00</h1>
-            </div>
+            {details?.createdByYou ? null : (
+              <div className="flex-1 text-center md:text-left">
+                <h1 className="text-xs text-muted-foreground md:text-sm">You Owed</h1>
+                <h1 className="text-xl font-bold">${details?.totalOwe}</h1>
+              </div>
+            )}
           </div>
         </div>
         <div className="rounded-lg p-4 md:!bg-transparent md:p-0" style={{ backgroundColor: '#fcd34d' }}>
@@ -28,7 +52,7 @@ export default function ExpenseInfoCard() {
       </CardContent>
       <CardFooter className="flex gap-2 md:hidden">
         <div className="flex-1">
-          <MemberListSheet />
+          <MemberListSheet loading={loading} members={details?.members} />
         </div>
         <Button className="flex-1">Settle up</Button>
       </CardFooter>
