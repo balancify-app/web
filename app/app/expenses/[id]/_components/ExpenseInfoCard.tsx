@@ -46,7 +46,7 @@ export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardPro
             )}
           </div>
         </div>
-        <div className="rounded-lg p-4 md:!bg-transparent md:p-0" style={{ backgroundColor: '#fcd34d' }}>
+        <div className="rounded-lg p-4 md:!bg-transparent md:p-0" style={{ backgroundColor: details?.iconBgColor }}>
           <img src={`/assets/svgs/icon-food.svg`} className="h-16 w-16" alt="icon" />
         </div>
       </CardContent>
