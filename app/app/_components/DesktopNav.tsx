@@ -7,6 +7,10 @@ import { UserButton } from '@clerk/nextjs'
 import { UserResource } from '@clerk/types'
 import { Dispatch, SetStateAction } from 'react'
 import { motion, Variants } from 'motion/react'
+import { Skeleton } from '@/components/ui/skeleton'
+import { dark } from '@clerk/themes'
+import { useAtomValue } from 'jotai'
+import { isDarkModeAtom } from '@/repositories/layout'
 
 type DesktopNavProps = {
   isCollapsed: boolean
@@ -34,6 +38,8 @@ export default function DesktopNav({
   user,
   setIsCollapsed,
 }: DesktopNavProps) {
+  const isDarkMode = useAtomValue(isDarkModeAtom)
+
   return (
     <motion.nav
       className="relative hidden flex-shrink-0 flex-col justify-between border-r p-4 md:flex"
@@ -72,7 +78,9 @@ export default function DesktopNav({
       <div className="flex h-9 items-center gap-2">
         {userLoaded ? (
           <>
-            <UserButton appearance={{ elements: { avatarBox: 'h-9 w-9 border' } }} />
+            <UserButton
+              appearance={{ elements: { avatarBox: 'h-9 w-9 border' }, baseTheme: isDarkMode ? dark : undefined }}
+            />
             <div
               className={cn('flex flex-col overflow-hidden', {
                 hidden: isCollapsed,
@@ -88,8 +96,8 @@ export default function DesktopNav({
           </>
         ) : (
           <>
-            <div className="h-9 w-9 animate-pulse rounded-full bg-border" />
-            <div className={cn('h-4 flex-1 animate-pulse rounded-lg bg-border', { hidden: isCollapsed })} />
+            <Skeleton className="h-10 w-10 rounded-full" />
+            <Skeleton className={cn('h-4 flex-1', { hidden: isCollapsed })} />
           </>
         )}
       </div>

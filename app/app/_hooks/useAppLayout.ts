@@ -2,7 +2,7 @@
 
 import { ROUTES } from '@/lib/constants'
 import { useUser } from '@clerk/nextjs'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { RiDashboardLine, RiDashboardFill } from 'react-icons/ri'
 import { AiOutlinePieChart, AiFillPieChart } from 'react-icons/ai'
 import { HiOutlineUser, HiUser, HiOutlineUsers, HiUsers } from 'react-icons/hi2'
@@ -10,6 +10,8 @@ import { IoSettingsOutline, IoSettings } from 'react-icons/io5'
 import { useAtom } from 'jotai'
 import { desktopNavToggleAtom } from '@/repositories/layout'
 import { IconType } from 'react-icons/lib'
+import { usePathname } from 'next/navigation'
+import useTheme from './useTheme'
 
 export type AppLinkType = {
   title: string
@@ -19,8 +21,10 @@ export type AppLinkType = {
 }
 
 export default function useAppLayout() {
+  const pathname = usePathname()
   const { user, isLoaded: userLoaded } = useUser()
   const [isCollapsed, setIsCollapsed] = useAtom(desktopNavToggleAtom)
+  useTheme()
 
   const appLinks: AppLinkType[] = useMemo(
     () => [
@@ -58,11 +62,23 @@ export default function useAppLayout() {
     [],
   )
 
+  const [isInitialLoading, setIsInitialLoading] = useState(true)
+
+  useEffect(() => {
+    const timerId = setTimeout(() => setIsInitialLoading(false), 300)
+
+    return () => clearTimeout(timerId)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return {
     isCollapsed,
     setIsCollapsed,
     user,
     userLoaded,
     appLinks,
+    isInitialLoading,
+    pathname,
   }
 }

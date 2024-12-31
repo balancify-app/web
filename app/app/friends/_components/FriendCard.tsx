@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Person } from '@/services/group.model'
-import { HiOutlineDotsVertical } from 'react-icons/hi'
+import { LuMoreVertical } from 'react-icons/lu'
 
 export default function FriendCard({ imageUrl, firstName, lastName, email, profileBgColor }: Person) {
   return (
@@ -21,7 +21,7 @@ export default function FriendCard({ imageUrl, firstName, lastName, email, profi
           <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
         </div>
         <Button variant="ghost" size="icon">
-          <HiOutlineDotsVertical />
+          <LuMoreVertical className="h-4 w-4" />
         </Button>
       </CardContent>
     </Card>
