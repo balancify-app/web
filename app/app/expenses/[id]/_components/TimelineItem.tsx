@@ -9,10 +9,13 @@ export default function TimelineItem({ createdBy, createdAt, events }: Timeline)
         <div className="absolute left-1/2 top-0 flex h-2 w-2 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-foreground" />
       </div>
       <div className="flex-1 pb-10">
-        <div className="flex items-center gap-2">
-          <Avatar className="h-5 w-5 border">
-            <AvatarImage src={createdBy.imageUrl} alt={`${createdBy.firstName} ${createdBy.lastName}`} />
-            <AvatarFallback className="text-xs">PS</AvatarFallback>
+        <div className="flex items-start gap-2">
+          <Avatar className="mt-0.5 h-5 w-5 border">
+            <AvatarImage src={createdBy.imageUrl} alt={`${createdBy.firstName}${createdBy.lastName}`} />
+            <AvatarFallback className="text-xs">
+              {createdBy.firstName[0]}
+              {createdBy.lastName[0]}
+            </AvatarFallback>
           </Avatar>
           <h1>
             {createdBy.firstName} {createdBy.lastName} - {dayjs(createdAt, 'DD/MM/YYYY').format('DD MMM YYYY, hh:mm A')}
