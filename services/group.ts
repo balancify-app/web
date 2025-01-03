@@ -8,9 +8,11 @@ export default class GroupService extends ApiService {
   // async getGroups(params: GetGroupListParams): Promise<ResponseResult<GroupListResult>> {
   async getGroups(): Promise<GroupListResult> {
     const fakeData: Group[] = Array.from({ length: 10 }, () => ({
+      id: faker.string.uuid(),
       name: faker.word.noun(),
       createdAt: dayjs(faker.date.recent()).format(DEFAULT_DATE_FORMAT),
       members: Array.from<number, Person>({ length: faker.number.int({ min: 3, max: 10 }) }, () => ({
+        id: faker.string.uuid(),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
         imageUrl: faker.image.avatar(),

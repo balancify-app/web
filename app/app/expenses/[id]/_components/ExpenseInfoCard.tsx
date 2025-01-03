@@ -19,16 +19,7 @@ export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardPro
   if (loading) return <ExpenseInfoCardPlaceholder />
 
   return (
-    <Card
-      className="bg-none md:bg-gradient-to-l"
-      style={
-        {
-          '--tw-gradient-from': `${details?.iconBgColor} var(--tw-gradient-from-position)`,
-          '--tw-gradient-to': 'rgb(0 0 0 / 0) var(--tw-gradient-to-position)',
-          '--tw-gradient-stops': 'var(--tw-gradient-from), var(--tw-gradient-to)',
-        } as React.CSSProperties
-      }
-    >
+    <Card>
       <CardContent className="flex flex-col-reverse items-center gap-4 p-6 md:flex-row md:items-start">
         <div className="flex-1 self-stretch">
           <div className="text-center md:text-left">
@@ -58,7 +49,7 @@ export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardPro
             </div>
           </div>
         </div>
-        <div className="rounded-lg p-4 md:!bg-transparent md:p-0" style={{ backgroundColor: details?.iconBgColor }}>
+        <div className="rounded-lg p-4" style={{ backgroundColor: details?.iconBgColor }}>
           <img src={`/assets/svgs/icon-${details?.icon}.svg`} className="h-16 w-16" alt="icon" />
         </div>
       </CardContent>
