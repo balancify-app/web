@@ -12,7 +12,7 @@ type MemberListProps = {
 
 export default function MemberList({ loading, members }: MemberListProps) {
   return (
-    <div className="mt-12">
+    <div className="mt-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-xl font-bold">Members</h1>
