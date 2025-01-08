@@ -6,10 +6,10 @@ import { useMemo } from 'react'
 export default function useExpense() {
   const { isPending, data: expenseRes } = useQuery({
     queryKey: [QUERY_KEYS.EXPENSES, 'list'],
-    queryFn: () => services.Expense.getExpenses(),
+    queryFn: () => services.expense.getExpenses(),
   })
 
-  const expenseData = useMemo(() => expenseRes?.data.data || [], [expenseRes?.data.data])
+  const expenseData = useMemo(() => expenseRes?.data || [], [expenseRes?.data])
 
   return { isPending, expenseData }
 }

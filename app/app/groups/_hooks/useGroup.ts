@@ -8,10 +8,10 @@ import { useMemo } from 'react'
 export default function useGroup() {
   const { isPending, data: groupRes } = useQuery({
     queryKey: [QUERY_KEYS.GROUPS, 'list'],
-    queryFn: () => services.Group.getGroups(),
+    queryFn: () => services.group.getGroups(),
   })
 
-  const groupData = useMemo(() => groupRes?.data.data || [], [groupRes?.data.data])
+  const groupData = useMemo(() => groupRes?.data || [], [groupRes?.data])
 
   return { isPending, groupData }
 }
