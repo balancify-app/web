@@ -26,7 +26,7 @@ export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardPro
             <h1 className="text-xl font-bold capitalize">{details?.name}</h1>
             <p className="text-xs text-muted-foreground">
               Added by {details?.createdByYou ? 'You' : details?.createdBy}
-              {' - '}
+              {' • '}
               {details?.createdAt}
             </p>
           </div>
@@ -57,7 +57,9 @@ export default function ExpenseInfoCard({ loading, details }: ExpenseInfoCardPro
         <div className="flex-1">
           <MemberListDrawer loading={loading} members={details?.members} />
         </div>
-        <Button className="flex-1">Settle up</Button>
+        <div className="flex-1">
+          <Button className="w-full">Settle up</Button>
+        </div>
       </CardFooter>
     </Card>
   )
