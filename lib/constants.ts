@@ -20,6 +20,7 @@ export const ROUTES = {
 
 export const LOCALSTORAGE_KEYS = {
   DESKTOP_NAV_TOGGLE: 'desktop_nav_toggle',
+  APP_THEME: 'app_theme',
 }
 
 export const QUERY_KEYS = {
@@ -59,3 +60,11 @@ export const BG_COLORS = [
   '#f9a8d4',
   '#fda4af',
 ]
+
+export const THEME = {
+  LIGHT: 'light',
+  DARK: 'dark',
+  SYSTEM: 'system',
+} as const
+
+export type AppTheme = (typeof THEME)[keyof typeof THEME]

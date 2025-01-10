@@ -1,16 +1,14 @@
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Card, CardContent } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function FriendCardPlaceholder() {
   return (
-    <Card className="shadow-none">
+    <Card>
       <CardContent className="flex items-center gap-2 p-4">
-        <Avatar>
-          <AvatarFallback className="animate-pulse bg-muted-foreground/15" />
-        </Avatar>
+        <Skeleton className="h-10 w-10 rounded-full" />
         <div className="flex flex-1 flex-col gap-2">
-          <div className="h-3 w-1/3 animate-pulse rounded-lg bg-muted-foreground/15" />
-          <div className="h-3 w-2/3 animate-pulse rounded-lg bg-muted-foreground/15" />
+          <Skeleton className="h-4 w-1/3" />
+          <Skeleton className="h-4 w-2/3" />
         </div>
       </CardContent>
     </Card>
